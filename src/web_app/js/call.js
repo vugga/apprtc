@@ -301,7 +301,7 @@ Call.prototype.connectToRoom_ = function(roomId) {
 
         this.params_.clientId = roomParams.client_id;
         this.params_.roomId = roomParams.room_id;
-        this.params_.roomLink = roomParams.room_link;
+        this.params_.roomLink = roomParams.room_link.replace('http:', 'https:');
         this.params_.isInitiator = roomParams.is_initiator === 'true';
 
         this.params_.messages = roomParams.messages;
@@ -476,8 +476,9 @@ Call.prototype.createPcClient_ = function() {
 
 Call.prototype.startSignaling_ = function() {
   trace('Starting signaling.');
+  trace('RoomID = '+this.params_.roomId+' ROOM LINK= '+this.params_.roomLink);
   if (this.isInitiator() && this.oncallerstarted) {
-    this.oncallerstarted(this.params_.roomId, this.params_.roomLink);
+    this.oncallerstarted(this.params_.roomId, this.params_.roomLink.replace('http:', 'https:'));
   }
 
   this.startTime = window.performance.now();
