@@ -93,7 +93,7 @@ function sendUrlRequest(method, url, async, body) {
 // }
 function requestIceServers(iceServerRequestUrl, iceTransports) {
   return new Promise(function(resolve, reject) {
-    sendAsyncUrlRequest('POST', iceServerRequestUrl).then(function(response) {
+    sendAsyncUrlRequest('GET', iceServerRequestUrl).then(function(response) {
       var iceServerRequestResponse = parseJSON(response);
       if (!iceServerRequestResponse) {
         reject(Error('Error parsing response JSON: ' + response));
